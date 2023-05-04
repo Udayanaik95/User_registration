@@ -22,7 +22,7 @@ def registration(request):
             NSPFO.username=NSUFO
             NSPFO.save()
 
-            send_mail('Registration','Registration Successfully Done','Udayanaik95@gmail.com',[NSUFO.email],fail_silently=False)
+            send_mail('Registration','Registration Successfully Done','abc@gmail.com',[NSUFO.email],fail_silently=False)
 
             return HttpResponse('User Registration Successfull')
         else:
