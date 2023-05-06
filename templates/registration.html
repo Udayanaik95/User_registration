@@ -1,8 +1,9 @@
-<html>
-<head>
-     <title>User Registration Form</title>
-</head>
-<body>
+{% extends 'dummy.html' %}
+{% block title %}
+    <title>Registration</title>
+{% endblock %}
+
+{% block body_block %}
     <center>
         <h1>User Registration Form</h1>
         <form method="POST" enctype="multipart/form-data">
@@ -14,5 +15,6 @@
             <input type="submit" value="Register">
         </form>
     </center>
+{% endblock %}
 </body>
 </html>

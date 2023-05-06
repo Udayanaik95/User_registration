@@ -5,6 +5,9 @@ from django.core.mail import send_mail
 
 # Create your views here.
 
+def home(request):
+    return render(request,'home.html')
+
 def registration(request):
     UFO=UserForm()
     PFO=ProfileForm()
