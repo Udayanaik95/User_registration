@@ -1,4 +1,4 @@
-<html lang="en">
+<html>
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,13 +13,19 @@
   <body>
 
 <center>
-    <nav class="nav" style="background-color: black; color: ghostwhite;">
+    <nav class="nav" style="background-color: black;">
 
-        <a href="{% url 'admin:index' %}" class="nav-link">Admin_Page</a>
+        <a href="{% url 'admin:index' %}" class="nav-link">Admin-Page</a>
         <a href="{% url 'registration' %}" class="nav-link">Registration</a>
-        <a href="{% url 'home' %}" class="nav-link">Home_Page</a>
-    
-    
+        <a href="{% url 'home' %}" class="nav-link">Home Page</a>
+     
+      {% if user.is_authenticated %}
+        <a href="{% url 'display_profile' %}" class="nav-link">Display_Profile</a>
+        <a href="{% url 'change_password'%}" class="nav-link">Change_Password</a>
+        <a href="{% url 'user_logout' %}" class="nav-link">User_Logout</a>
+      {% else %} 
+        <a href="{% url 'user_login' %}" class="nav-link">User_Login</a>
+      {% endif %}
     
     </nav>
     <!-- Optional JavaScript; choose one of the two! -->

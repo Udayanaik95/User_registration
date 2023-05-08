@@ -2,11 +2,22 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from App.forms import *
 from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate,login,logout
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def home(request):
+    
+    if request.session.get('username'):
+        username=request.session.get('username')
+        d={'username':username}
+        return render(request,'home.html',d)
+    
     return render(request,'home.html')
+
 
 def registration(request):
     UFO=UserForm()
@@ -32,5 +43,49 @@ def registration(request):
             return HttpResponse('Data Is Not Valid')
 
     return render(request,'registration.html',d)
+
+
+def user_login(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+
+        AUO=authenticate(username=username,password=password)
+        if AUO and AUO.is_active:
+            login(request,AUO)
+            request.session['username']=username
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            return HttpResponse('Invalid Username or Password')
+        
+    return render(request,'user_login.html')
+
+
+@login_required
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('home'))
+
+
+@login_required
+def display_profile(request):
+    username=request.session.get('username')
+    UO=User.objects.get(username=username)
+    PO=Profile.objects.get(username=UO)
+    d={'UO':UO,'PO':PO}
+    return render(request,'display_profile.html',d)
+
+@login_required
+def change_password(request):
+    if request.method=='POST':
+        pw=request.POST['pw']
+        username=request.session.get('username')
+        UO=User.objects.get(username=username)
+        UO.set_password(pw)
+        UO.save()
+        return HttpResponse('Password is changed successfully')
+    return render(request,'change_password.html')
+
 
 # fail_silently=False use to know the error, if any Error is there

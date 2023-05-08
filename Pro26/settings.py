@@ -132,7 +132,7 @@ MEDIA_ROOT=MEDIA_DIR
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='abc@gmail.com'
+EMAIL_HOST_USER='abc25@gmail.com'
 EMAIL_HOST_PASSWORD='Take password from gmail 2 Step app password'
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
