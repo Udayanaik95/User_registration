@@ -88,4 +88,21 @@ def change_password(request):
     return render(request,'change_password.html')
 
 
+def f_pw(request):
+    if request.method=='POST':
+        un=request.POST['un']
+        pw=request.POST['pw']
+
+        LUO=User.objects.filter(username=un)
+        if LUO:
+            UO=LUO[0]
+            UO.set_password(pw)
+            UO.save()
+            
+            return HttpResponse('Password Change Successfully')
+        else:
+            return HttpResponse('User Details Is Not Available In Database')
+    return render(request,'f_pw.html')
+
+
 # fail_silently=False use to know the error, if any Error is there
